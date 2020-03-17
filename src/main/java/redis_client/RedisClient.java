@@ -50,6 +50,10 @@ public class RedisClient {
         System.out.println("Old value for amitai was: " + oldValue);
         System.out.println("New value for amitai is: " + jedis.get("amitai"));
 
+        // Get the string values for a list of keys
+        jedis.set("itamar3", "test6");
+        System.out.println("Value for all keys: " + jedis.mget("itamar", "itamar2", "amitai","itamar3"));
+
         // Delete 3 keys using the del function. you can also usethe unlink function
         // to delete the keys. Using unlink the actual memory reclaiming in a different thread,
         // so it is not blocking, while del is
