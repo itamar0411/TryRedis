@@ -61,6 +61,12 @@ public class RedisClient {
         keys = jedis.keys("*");
         System.out.println("Keys after deletion: " + keys);
 
+        jedis.set("counter", "1");
+        jedis.decr("counter");
+        System.out.println("Counter after decr: " + jedis.get("counter"));
+        jedis.incr("counter");
+        System.out.println("Counter after incrBy 2: " + jedis.incrBy("counter", 2));
+
         jedis.close();
     }
 }
