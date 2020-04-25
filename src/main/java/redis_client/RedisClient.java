@@ -79,6 +79,21 @@ public class RedisClient {
         Long num = jedis.hset("familyId", map);
         System.out.print(jedis.hgetAll("familyId"));
 
+        //create an ordered set using zadd and print the results zrangeByScore() which returns an ordered set
+        //of the names (strings)
+        Map<String, Double> orderedSet = new HashMap<>();
+        orderedSet.put("david", 500.0);
+        orderedSet.put("itamar", 400.0);
+        orderedSet.put("amitai", 550.0);
+        orderedSet.put("meital", 700.0);
+        orderedSet.put("hamutal", 560.0);
+        orderedSet.put("tom", 620.0);
+        orderedSet.put("dagan", 300.0);
+        orderedSet.put("einav", 4400.0);
+        num = jedis.zadd("scores1", orderedSet);
+        Set<String> nameSet = jedis.zrangeByScore("scores1", 300, 620);
+        System.out.println(nameSet);
+
         jedis.close();
     }
 }
