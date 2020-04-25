@@ -2,7 +2,9 @@ package redis_client;
 
 import redis.clients.jedis.Jedis;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class RedisClient {
@@ -66,6 +68,16 @@ public class RedisClient {
         System.out.println("Counter after decr: " + jedis.get("counter"));
         jedis.incr("counter");
         System.out.println("Counter after incrBy 2: " + jedis.incrBy("counter", 2));
+
+        //value is a map, hset returns the number of values in the map
+        //use hgetAll to get the map by the key
+        Map<String, String> map = new HashMap<>();
+        map.put("id1", "itamar sasson");
+        map.put("id2", "amitai sasson");
+        map.put("id3", "david sasson");
+        map.put("id4", "hamutal sasson");
+        Long num = jedis.hset("familyId", map);
+        System.out.print(jedis.hgetAll("familyId"));
 
         jedis.close();
     }
