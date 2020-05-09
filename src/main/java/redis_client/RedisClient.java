@@ -94,6 +94,14 @@ public class RedisClient {
         Set<String> nameSet = jedis.zrangeByScore("scores1", 300, 620);
         System.out.println(nameSet);
 
+        //BitMap set 1 for LSB (place 0)
+        jedis.setbit("0", 0, "1");
+        //set 1 for bit 2
+        jedis.setbit("2", 0, "1");
+        System.out.println("Bit 0 is on = " + jedis.getbit("0", 0));
+        System.out.println("Bit 2 is on = " + jedis.getbit("2", 0));
+        System.out.println("Bit 1 is on = " + jedis.getbit("1", 0));
+
         jedis.close();
     }
 }
